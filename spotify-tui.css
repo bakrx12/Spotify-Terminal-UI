@@ -772,8 +772,8 @@ form .main-topBar-searchBar:placeholder-shown {
 
 /* playback bar itself */
 .main-nowPlayingBar-nowPlayingBar {
-  padding: 10px 1px 32px 8px;
-  height: 90px;
+  padding: 0px 1px 32px 18px;
+  height: 80px;
 }
 /* 1. Move song info back to the left */
 .main-nowPlayingBar-left {
@@ -796,7 +796,7 @@ form .main-topBar-searchBar:placeholder-shown {
 .main-nowPlayingWidget-coverArt {
   display: block !important;
   visibility: visible !important;
-  height: 60px !important; /* Give it an actual height */
+  height: 50px !important; /* Give it an actual height */
   width: 80px !important;  /* Keep it square */
   padding: 0 6 0 !important;   /* Remove the padding that's breaking the layout */
   margin-right: 16px !important; /* Create space between art and text */
@@ -807,18 +807,16 @@ form .main-topBar-searchBar:placeholder-shown {
 /* 3. Fix the center controls so they don't overlap */
 .main-nowPlayingBar-center
 {
-  position: abs !important;
-  margin-bottom: -10px 0px;
   transform: !important;
 }
 
 /* 4. Ensure the playback bar doesn't float over the info */
 .playback-bar {
   position: relative !important;
-  padding: 10px 0px -10px;
-  margin-bottom: -40px;
   left: !important;
-  width: 120% !important;
+  width: 100% !important;
+  margin-top: 50px;
+  margin-bottom: -40px;
 }
 
 .main-nowPlayingBar-nowPlayingBar 
@@ -840,7 +838,7 @@ form .main-topBar-searchBar:placeholder-shown {
   
   content: " " !important;
   visibility: visible;
-  margin: 30px;
+
   display: flex;
   padding-top: 0px;
 }
