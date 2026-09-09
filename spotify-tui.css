@@ -44,7 +44,7 @@
   --display-header-image: none; /* none | block */
   --display-sidebar-image: block; /* none | block */
   --display-tracklist-image: none; /* none | block */
-  --display-spicetify-banner-none: block; /* none | block */
+  --display-spicetify-banner-none: none; /* none | block */
   --display-music-banner-none: none; /* none | block */
 
   --border-radius: 0px;
@@ -89,7 +89,6 @@
 .main-nowPlayingView-lyricsContent * {
   font-family: var(--font-family);
   font-size: var(--font-size-lyrics);
-  padding: 0px 50px 0px;
   font-weight: var(--font-weight);
   line-height: var(--line-height);
 }
@@ -152,6 +151,7 @@
 .Root__top-bar {
   border: var(--border-width) solid transparent;
 }
+
 .Root__nav-bar,
 .main-nowPlayingBar-container {
   overflow: visible;
@@ -168,6 +168,7 @@ div:has(> .main-entityHeader-container) {
   min-height: unset !important;
 }
 .main-entityHeader-imageContainerNew {
+  
   height: 128px;
   width: 128px;
 }
@@ -214,11 +215,11 @@ div[class*="minBlockSize_56px-padding_8px"] {
 /* fullscreen */
 .spotifyinternal-artistnpv .npv-what-is-playing .npv-cover-art,
 .spotifyinternal-artistnpv .npv-what-is-playing .npv-track {
-  bottom: 8em;
+  bottom: 4em;
 }
 .spotifyinternal-artistnpv .npv-what-is-playing .npv-cover-art {
   -webkit-transform: scale(0.34375);
-  transform: scale(0.34375);
+  transform: scale(8.34375);
 }
 .spotifyinternal-artistnpv .npv-what-is-playing .npv-track {
   -webkit-transform: none;
@@ -226,10 +227,11 @@ div[class*="minBlockSize_56px-padding_8px"] {
 }
 .npv-main-container .playback-bar {
   display: flex;
-  width: 80%;
+  padding-left: 440px;
+  width: 90% !important;
 }
 .npv-nowPlayingBar-controls {
-  height: auto;
+  height: 10px;
 }
 
 /* recolor */
@@ -643,18 +645,15 @@ form .main-topBar-searchBar:placeholder-shown {
 
 /* check out a cool project: https://github.com/Rigellute/spotify-tui
 
-    _________  ____  / /_(_) __/_  __      / /___  __(_)\A
-   / ___/ __ \\/ __ \\/ __/ / /_/ / / /_____/ __/ / / / /\A
-  (__  ) /_/ / /_/ / /_/ / __/ /_/ /_____/ /_/ /_/ / /\A
- /____/ .___/\\____/\\__/_/_/  \\__, /      \\__/\\__,_/_/\A
+    _________  ____  / /_(_) __/_  __ 
+   / ___/ __ \\/ __ \\/ __/ / /_/ / /
+  (__  ) /_/ / /_/ / /_/ / __/ /_/ /
+ /____/ .___/\\____/\\__/_/_/  \\__
      /_/                    /____/
 
 */
 
-.main-entityHeader-title::before {
-    content: none !important; /* Removes the ASCII art generation */
-    display: none !important;
-}
+
 
 /* top bar */
 .main-topBar-container a,
@@ -711,7 +710,7 @@ form .main-topBar-searchBar:placeholder-shown {
 }
 .lyrics-lyrics-contentContainer {
     font-variant-ligatures: common-ligatures !important;
-  width: 100% !important;
+  width: 110% !important;
   max-width: unset !important;
   justify-content: flex-start !important;
   align-items: flex-start !important;
@@ -776,7 +775,7 @@ form .main-topBar-searchBar:placeholder-shown {
 .main-nowPlayingBar-left {
   position: relative !important;
   margin-left: -50px;
-  margin-bottom: ;
+  margin-bottom: unset;
   width: 25% !important; /* Adjust as needed */
   justify-content: flex-start !important;
   order: -1 !important; /* Forces it to the left side */
@@ -804,24 +803,19 @@ form .main-topBar-searchBar:placeholder-shown {
 /* 3. Fix the center controls so they don't overlap */
 .main-nowPlayingBar-center
 {
-  transform: !important;
+  transform: unset;
 }
 
 /* 4. Ensure the playback bar doesn't float over the info */
 .playback-bar {
   position: relative !important;
-  left: !important;
+  left: unset !important;
   width: 100% !important;
   margin-top: 50px;
   margin-bottom: -40px;
 }
 
-.main-nowPlayingBar-nowPlayingBar 
-  position: absolute !important;{
-  min-height: 50px;
-  display: flex;
-  flex-direction: column;
-}
+
 
 /* playback time indicators */
 .playback-bar__progress-time-elapsed {
@@ -933,9 +927,9 @@ form .main-topBar-searchBar:placeholder-shown {
 }
 
 /* player controls */
-.player-controls__buttons 
+.player-controls__buttons {
   margin-bottom: 20px;
-  display: absolute; !important
+  display: absolute; 
 }
 .player-controls__buttons,
 .main-nowPlayingBar-extraControls {
@@ -1077,3 +1071,4 @@ button:has(
 .main-connectBar-connectBar svg {
   fill: var(--spice-accent-active);
   
+}
