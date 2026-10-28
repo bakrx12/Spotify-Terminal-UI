@@ -36,8 +36,8 @@
 
   --font-size-lyrics: 13px; /* 1.5em (default) */
 
-  --font-family-header: "asciid";
-  --font-size-multiplier-header: 4;
+  --font-family-header: var(--font-family);
+  --font-size-multiplier-header: 1;
 
   --display-card-image: block; /* none | block */
   --display-coverart-image: block; /* none | block */
@@ -146,7 +146,7 @@
   margin: 8px 0 0;
 }
 .Root__top-container {
-  --panel-gap: 10px !important;
+  --panel-gap: 16px !important;
 }
 .Root__top-bar {
   border: var(--border-width) solid transparent;
@@ -766,56 +766,91 @@ form .main-topBar-searchBar:placeholder-shown {
     PLAYBACK BAR
     ================================ */
 
-/* playback bar itself */
+/* ===== PLAYBACK BAR LAYOUT ===== */
 .main-nowPlayingBar-nowPlayingBar {
-  padding: 0px 1px 32px 18px;
-  height: 80px;
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+  padding: 0 16px !important;
 }
-/* 1. Move song info back to the left */
+
+/* left: cover + track info */
 .main-nowPlayingBar-left {
   position: relative !important;
-  margin-left: -50px;
-  margin-bottom: unset;
-  width: 25% !important; /* Adjust as needed */
+  display: flex;
+  align-items: center;
   justify-content: flex-start !important;
-  order: -1 !important; /* Forces it to the left side */
+  width: 30% !important;
+  min-width: 180px;
+  margin: 0 !important;
+  order: 0 !important;
 }
-
 .main-nowPlayingWidget-trackInfo {
   text-align: left !important;
-  margin-left: 30px !important;
+  margin: 0 !important;
 }
 
-/* 2. Show Album Art */
-.main-nowPlayingWidget-coverArt .cover-art,
-.main-coverSlotCollapsed-container,
-.main-nowPlayingWidget-coverArt {
+/* cover art (one rule only) */
+.main-nowPlayingWidget-coverArt,
+.main-coverSlotCollapsed-container {
   display: block !important;
   visibility: visible !important;
-  height: 50px !important; /* Give it an actual height */
-  width: 80px !important;  /* Keep it square */
-  padding: 0 6 0 !important;   /* Remove the padding that's breaking the layout */
-  margin-right: 16px !important; /* Create space between art and text */
-  margin-left: -5px !important;
-  border-radius: 1 !important;  /* Sharp edges for TUI look */
+  width: 56px !important;
+  height: 56px !important;
+  padding: 0 !important;
+  margin: 0 12px 0 0 !important;
+  border-radius: 0 !important;
 }
-
-/* 3. Fix the center controls so they don't overlap */
-.main-nowPlayingBar-center
-{
-  transform: unset;
-}
-
-/* 4. Ensure the playback bar doesn't float over the info */
-.playback-bar {
-  position: relative !important;
-  left: unset !important;
+.main-nowPlayingWidget-coverArt .cover-art {
   width: 100% !important;
-  margin-top: 50px;
-  margin-bottom: -40px;
+  height: 100% !important;
 }
 
+/* center: controls on top, seek bar below */
+.main-nowPlayingBar-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 722px;
+  transform: none !important;
+}
+.player-controls {
+  width: 100%;
+}
+.player-controls__buttons {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 6px 0 !important;
+}
+.playback-bar {
+  position: static !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100% !important;
+  margin: 0 !important;
+}
 
+/* right side */
+.main-nowPlayingBar-right {
+  display: flex;
+  justify-content: flex-end;
+  width: 30%;
+}
+
+/* fade controls, full on hover */
+.player-controls__buttons,
+.main-nowPlayingBar-extraControls {
+  opacity: 0.4;
+  transition: opacity var(--border-transition);
+}
+.player-controls__buttons:hover,
+.main-nowPlayingBar-extraControls:hover {
+  opacity: 1;
+}
 
 /* playback time indicators */
 .playback-bar__progress-time-elapsed {
@@ -840,7 +875,7 @@ form .main-topBar-searchBar:placeholder-shown {
 }
 
 .playback-progressbar-container div[data-testid="progress-bar"] {
-  --progress-bar-height: 0px;
+  --progress-bar-height: 4px;
   --progress-bar-radius: 0px;
   --fg-color: var(--spice-button-active);
   --bg-color: var(--spice-button-disabled);
@@ -858,20 +893,6 @@ form .main-topBar-searchBar:placeholder-shown {
   transition-duration: unset;
 }
 
-/* cover art */
-.main-nowPlayingWidget-coverArt .cover-art,
-.main-coverSlotCollapsed-container,
-.main-nowPlayingWidget-coverArt {
-  display: block !important;
-  visibility: visible !important;
-  height: 30px !important; /* Increased from 60px/70px */
-  width: 80px !important;
-  padding: 30px !important;
-  margin-right: 35px !important;
-  margin-left: -20px;
-  margin-top: -20px;
-  border-radius: 0 !important;
-}
 /* Show tracklist album art */
 .main-trackList-rowImage {
   display: block !important;
@@ -892,14 +913,6 @@ form .main-topBar-searchBar:placeholder-shown {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-}
-
-/* left nowplaying text */
-.main-nowPlayingBar-left {
-  padding-inline-start: 23;
-}
-.main-nowPlayingWidget-trackInfo {
-  margin: 0;
 }
 
 /* volume bar */
@@ -926,20 +939,7 @@ form .main-topBar-searchBar:placeholder-shown {
   background-color: transparent;
 }
 
-/* player controls */
-.player-controls__buttons {
-  margin-bottom: 20px;
-  display: absolute; 
-}
-.player-controls__buttons,
-.main-nowPlayingBar-extraControls {
-  opacity: 0.25;
-  transition: opacity var(--border-transition);
-}
-.player-controls__buttons:hover,
-.main-nowPlayingBar-extraControls:hover {
-  opacity: 2;
-}
+/* player controls (icon replacements) */
 .main-shuffleButton-button::before,
 button[data-testid="control-button-shuffle"] > span::after,
 button
